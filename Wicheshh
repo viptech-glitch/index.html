@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festive Wishing Website</title>
+    <style>
+        /* CSS: वेबसाइट की डिज़ाइनिंग */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 90%;
+            width: 400px;
+            animation: bounce 2s infinite alternate;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #facc15;
+            text-shadow: 0 0 10px #facc15;
+            margin-bottom: 10px;
+        }
+
+        .sender-name {
+            font-size: 2rem;
+            color: #f43f5e;
+            font-weight: bold;
+            text-shadow: 0 0 8px #f43f5e;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .input-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #059669;
+            transform: scale(1.05);
+        }
+
+        .share-link {
+            margin-top: 15px;
+            word-break: break-all;
+            color: #38bdf8;
+            display: none;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- यहाँ नाम दिखेगा -->
+        <div class="sender-name" id="displayName">आपके दोस्त</div>
+        <p>की तरफ से आपको और आपके पूरे परिवार को</p>
+        
+        <!-- त्योहार का नाम (आप इसे बदल सकते हैं) -->
+        <h1>शुभ दीपावली</h1> 
+        
+        <p>✨ भगवान आपकी हर मनोकामना पूरी करें। यह साल आपके जीवन में ढेर सारी खुशियाँ, सुख और समृद्धि लेकर आए! ✨</p>
+
+        <!-- अपना नाम डालकर लिंक बनाने का बॉक्स -->
+        <div class="input-box">
+            <h3>Rao Saab </h3>
+            <input type="text" id="nameInput" placeholder="Raosahab...">
+            <br>
+            <button onclick="generateLink()">👉 जादुई लिंक बनाएं</button>
+            <div class="share-link" id="shareLinkContainer">
+                <p>इस लिंक को कॉपी करके सबको भेजें:</p>
+                <strong id="linkText"></strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript: URL से नाम पढ़ना और नया लिंक बनाना
+        
+        // 1. चेक करें कि URL में कोई नाम है या नहीं
+        const urlParams = new URLSearchParams(window.location.search);
+        const senderName = urlParams.get('name');
+        
+        if (senderName) {
+            document.getElementById('displayName').innerText = decodeURIComponent(senderName);
+        }
+
+        // 2. नया विशिंग लिंक जनरेट करने का फंक्शन
+        function generateLink() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (name === "") {
+                alert("Rao Sahab");
+                return;
+            }
+            
+            // मौजूदा URL के साथ नाम जोड़ना
+            const currentUrl = window.location.href.split('?')[0];
+            const magicUrl = `${currentUrl}?name=${encodeURIComponent(name)}`;
+            
+            // स्क्रीन पर लिंक दिखाना
+            document.getElementById('linkText').innerText = magicUrl;
+            document.getElementById('shareLinkContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
